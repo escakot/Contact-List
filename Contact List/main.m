@@ -33,7 +33,11 @@ int main(int argc, const char * argv[]) {
             }
             
             if ([userInput isEqualToString:@"list"]){
-                [contactList listContacts];
+                if (contactList.contactArray.count == 0){
+                    NSLog(@"No contacts avaiable. Please use new option.");
+                } else {
+                    [contactList listContacts];
+                }
             }
 
             if ([userInput isEqualToString:@"quit"]){
