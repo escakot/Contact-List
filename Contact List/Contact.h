@@ -14,4 +14,6 @@
 @property NSString* lastName;
 @property NSString* email;
 
+- (void) contactInfo;
+
 @end

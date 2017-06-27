@@ -10,5 +10,9 @@
 
 @implementation Contact
 
+- (void) contactInfo {
+    NSLog(@"\nFull Name: %@ %@\n"
+          "Email: %@", self.firstName, self.lastName, self.email);
+}
 
 @end

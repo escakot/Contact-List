@@ -22,6 +22,8 @@ int main(int argc, const char * argv[]) {
             NSString *userInput = [inputCollector inputForPrompt:@"\nWhat would you like to do next?\n"
                                    "new - Create a new contact\n"
                                    "list - List all contacts\n"
+                                   "show # - Display contact at index #\n"
+                                   "find <name> - Search contact name/email for match\n"
                                    "quit - Exit Application\n"];
             
             if ([userInput isEqualToString:@"new"]){
@@ -39,7 +41,23 @@ int main(int argc, const char * argv[]) {
                     [contactList listContacts];
                 }
             }
+           
+            if ([userInput hasPrefix:@"show"]){
+                int contactIndex = [[userInput substringFromIndex:userInput.length -1] intValue];
+//                NSLog(@"%i", contactIndex);
+                if (contactList.contactArray.count > 0) {
+                    Contact *showContact = contactList.contactArray[contactIndex];
+                    [showContact contactInfo];
+                } else {
+                    NSLog(@"Contact not found");
+                }
+            }
 
+            if ([userInput hasPrefix:@"find"]){
+                NSString *searchTerm = [userInput componentsSeparatedByString:@" "].lastObject;
+                [contactList searchContacts:searchTerm];
+            }
+            
             if ([userInput isEqualToString:@"quit"]){
                 runProg = NO;
                 NSLog(@"Goodbye!");

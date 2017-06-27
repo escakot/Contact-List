@@ -31,8 +31,25 @@
     for (int i = 0; i<self.contactArray.count; i++)
     {
         Contact *currentContact = self.contactArray[i];
-        NSString *indexContact = [NSString stringWithFormat:@"%i:<%@ %@>()\n", i, currentContact.firstName, currentContact.lastName];
+        NSString *indexContact = [NSString stringWithFormat:@"%i:<%@ %@>(%@)\n", i, currentContact.firstName, currentContact.lastName, currentContact.email];
         [concatList appendString:indexContact];
+    }
+    NSLog(@"%@", concatList);
+}
+
+-(void)searchContacts:(NSString *)searchTerm {
+    NSMutableString *concatList = [[NSMutableString alloc] initWithString:@"\n"];
+    for (int i = 0; i<self.contactArray.count; i++)
+    {
+        Contact *currentContact = self.contactArray[i];
+        if ([currentContact.firstName.lowercaseString rangeOfString:searchTerm.lowercaseString].location == NSNotFound &&
+            [currentContact.lastName.lowercaseString rangeOfString:searchTerm.lowercaseString].location == NSNotFound &&
+            [currentContact.email.lowercaseString rangeOfString:searchTerm.lowercaseString].location == NSNotFound) {
+            NSLog(@"\nContact not found.");
+        } else {
+            NSString *indexContact = [NSString stringWithFormat:@"%i:<%@ %@>(%@)\n", i, currentContact.firstName, currentContact.lastName, currentContact.email];
+            [concatList appendString:indexContact];
+        }
     }
     NSLog(@"%@", concatList);
 }

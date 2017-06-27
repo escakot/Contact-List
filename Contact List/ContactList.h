@@ -17,4 +17,6 @@
 
 -(void)listContacts;
 
+-(void)searchContacts:(NSString *)searchTerm;
+
 @end
