@@ -8,19 +8,39 @@
 
 #import <Foundation/Foundation.h>
 #import "InputCollector.h"
+#import "Contact.h" 
+#import "ContactList.h"
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
-        // insert code here...
+        
+        InputCollector *inputCollector = [[InputCollector alloc] init];
+        ContactList *contactList = [[ContactList alloc] init];
         
         BOOL runProg = YES;
         do {
-            InputCollector *inputCollector = [[InputCollector alloc] init];
-            NSString *userInput = [inputCollector inputForPrompt:@""];
-           
+            NSString *userInput = [inputCollector inputForPrompt:@"\nWhat would you like to do next?\n"
+                                   "new - Create a new contact\n"
+                                   "list - List all contacts\n"
+                                   "quit - Exit Application\n"];
+            
+            if ([userInput isEqualToString:@"new"]){
+                Contact *newContact = [[Contact alloc] init];
+                newContact.firstName = [inputCollector inputForPrompt:@"Enter your first name"];
+                newContact.lastName = [inputCollector inputForPrompt:@"Enter your last name"];
+                newContact.email = [inputCollector inputForPrompt:@"Enter your email"];
+                [contactList addContact:newContact];
+            }
+            
+            if ([userInput isEqualToString:@"list"]){
+                [contactList listContacts];
+            }
+
             if ([userInput isEqualToString:@"quit"]){
                 runProg = NO;
+                NSLog(@"Goodbye!");
             }
+            
         }while(runProg);
     }
     return 0;
