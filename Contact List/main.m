@@ -12,7 +12,16 @@
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
         // insert code here...
-        NSLog(@"Hello, World!");
+        
+        BOOL runProg = YES;
+        do {
+            InputCollector *inputCollector = [[InputCollector alloc] init];
+            NSString *userInput = [inputCollector inputForPrompt:@""];
+           
+            if ([userInput isEqualToString:@"quit"]){
+                runProg = NO;
+            }
+        }while(runProg);
     }
     return 0;
 }

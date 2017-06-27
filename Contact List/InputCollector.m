@@ -15,7 +15,10 @@
     fgets(inputChar, 255, stdin);
     NSLog(@"%@>", promptString);
     
-    return [NSString stringWithCString:inputChar encoding:NSUTF8StringEncoding];
+    NSString *inputString = [NSString stringWithCString:inputChar encoding:NSUTF8StringEncoding];
+    NSCharacterSet *newLineChar = [NSCharacterSet whitespaceAndNewlineCharacterSet];
+    
+    return [inputString stringByTrimmingCharactersInSet:newLineChar];
 }
 
 @end
