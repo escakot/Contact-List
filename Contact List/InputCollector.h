@@ -7,9 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ContactList.h"
 
 @interface InputCollector : NSObject
 
 -(NSString *)inputForPrompt:(NSString *)promptString;
+-(NSString *)inputForEmail:(NSString *)promptString checkDuplicate:(NSMutableArray *)contactArray;
 
 @end

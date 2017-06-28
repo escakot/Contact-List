@@ -28,10 +28,15 @@ int main(int argc, const char * argv[]) {
             
             if ([userInput isEqualToString:@"new"]){
                 Contact *newContact = [[Contact alloc] init];
-                newContact.firstName = [inputCollector inputForPrompt:@"Enter your first name"];
-                newContact.lastName = [inputCollector inputForPrompt:@"Enter your last name"];
-                newContact.email = [inputCollector inputForPrompt:@"Enter your email"];
-                [contactList addContact:newContact];
+                NSString *checkEmail= [inputCollector inputForEmail:@"Enter your email" checkDuplicate:contactList.contactArray];
+                if ([checkEmail isEqualToString:@"\nInvalid email!"]) {
+                    NSLog(@"%@", checkEmail);
+                } else {
+                    newContact.email = checkEmail;
+                    newContact.firstName = [inputCollector inputForPrompt:@"Enter your first name"];
+                    newContact.lastName = [inputCollector inputForPrompt:@"Enter your last name"];
+                    [contactList addContact:newContact];
+                }
             }
             
             if ([userInput isEqualToString:@"list"]){
@@ -62,7 +67,6 @@ int main(int argc, const char * argv[]) {
                 runProg = NO;
                 NSLog(@"Goodbye!");
             }
-            
         }while(runProg);
     }
     return 0;
